@@ -115,7 +115,9 @@ class ConfigStore(object):
         if not self._config:
             namespace = {}
             if os.path.exists(self.config_path):
-                execfile(self.config_path, namespace)
+                with open(self.config_path) as f:
+                    code = compile(f.read(), self.config_path, 'exec')
+                    exec(code, namespace)
             self._config = namespace.get('config') or Configuration()
         return self._config
     _config = None

@@ -29,7 +29,8 @@ def get_config_directory(appname):
     if platform.system().lower() == 'windows':
         path = os.path.join(os.getenv('APPDATA') or '~', appname, appname)
     elif platform.system().lower() == 'darwin':
-        path = os.path.join('~', 'Library', 'Application Support', appname)
+        #path = os.path.join('~', 'Library', 'Application Support', appname)
+        path = os.path.join('~/.config', appname.lower())
     else:
         path = os.path.join(os.getenv('XDG_CONFIG_HOME') or '~/.config',
                             appname.lower())
